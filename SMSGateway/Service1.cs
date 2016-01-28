@@ -77,6 +77,9 @@ namespace SMSGateway
                 _TimeSync = int.Parse(System.Configuration.ConfigurationManager.AppSettings["TimeSync"].ToString());
                 _SQLUpdate = System.Configuration.ConfigurationManager.AppSettings["SQLUpdate"].ToString();
 
+                if (String.IsNullOrEmpty(_ModemPort))
+                    return;
+
                 //grava log
                 eventLog1.WriteEntry("In OnStart");
 
@@ -194,6 +197,9 @@ namespace SMSGateway
 
         public void Parar()
         {
+            if (String.IsNullOrEmpty(_ModemPort))
+                return;
+
             _aTimer.Stop();
             _aTimer.Dispose();
 
